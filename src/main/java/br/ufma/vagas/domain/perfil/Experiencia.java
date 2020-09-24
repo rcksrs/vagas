@@ -1,7 +1,8 @@
-package br.ufma.vagas.model;
+package br.ufma.vagas.domain.perfil;
 
 import java.time.LocalDate;
 
+import br.ufma.vagas.domain.EntityBase;
 import lombok.Data;
 
 @Data

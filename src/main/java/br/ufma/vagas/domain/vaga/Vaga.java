@@ -1,8 +1,12 @@
-package br.ufma.vagas.model;
+package br.ufma.vagas.domain.vaga;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import br.ufma.vagas.domain.EntityBase;
+import br.ufma.vagas.domain.geral.Curso;
+import br.ufma.vagas.domain.geral.Empresa;
+import br.ufma.vagas.domain.perfil.TipoExperiencia;
 import lombok.Data;
 
 @Data

@@ -1,5 +1,6 @@
-package br.ufma.vagas.model;
+package br.ufma.vagas.domain.geral;
 
+import br.ufma.vagas.domain.EntityBase;
 import lombok.Data;
 
 @Data

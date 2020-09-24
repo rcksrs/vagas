@@ -1,4 +1,4 @@
-package br.ufma.vagas.model;
+package br.ufma.vagas.domain.perfil;
 
 public enum Nivel {
 	BASICO,
