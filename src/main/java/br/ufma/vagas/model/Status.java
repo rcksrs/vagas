@@ -1,0 +1,12 @@
+package br.ufma.vagas.model;
+
+public enum Status {
+	ABERTO,
+	FECHADO,
+	ANALISE_PERFIL,
+	ENTREVISTA,
+	AVALIACAO_TECNICA,
+	DESCLASSIFICADO,
+	CONVOCADO,
+
+}

@@ -1,0 +1,15 @@
+package br.ufma.vagas.model;
+
+public enum TipoCurso {
+	DOUTORADO,
+	MESTRADO,
+	ESPECIALIZACAO,
+	MBA,
+	BACHARELADO,
+	LICENCIATURA,
+	TECNOLOGO,
+	TECNICO,
+	MEDIO_TECNICO,
+	ENS_MEDIO,
+	ENS_FUNDAMENTAL
+}
