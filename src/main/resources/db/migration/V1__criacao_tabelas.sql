@@ -1,7 +1,7 @@
 CREATE TABLE empresa (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	cnpj text NOT NULL,
 	email text NOT NULL,
@@ -15,6 +15,8 @@ CREATE TABLE empresa (
 	pais text NULL,
 	referencia text NULL,
 	nome text NOT NULL,
+	natureza text NULL,
+	representante text NOT NULL,
 	site text NULL,
 	telefone text NOT NULL,
 	CONSTRAINT empresa_pkey PRIMARY KEY (id)
@@ -23,7 +25,7 @@ CREATE TABLE empresa (
 CREATE TABLE perfil (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	resumo text NULL,
 	url_imagem text NULL,
@@ -34,7 +36,7 @@ CREATE TABLE perfil (
 CREATE TABLE status (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	descricao text NOT NULL UNIQUE,
 	CONSTRAINT status_pkey PRIMARY KEY (id)
@@ -43,7 +45,7 @@ CREATE TABLE status (
 CREATE TABLE tipo_curso (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	descricao text NOT NULL UNIQUE,
 	CONSTRAINT tipo_curso_pkey PRIMARY KEY (id)
@@ -52,7 +54,7 @@ CREATE TABLE tipo_curso (
 CREATE TABLE tipo_experiencia (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	descricao text NOT NULL UNIQUE,
 	CONSTRAINT tipo_experiencia_pkey PRIMARY KEY (id)
@@ -61,7 +63,7 @@ CREATE TABLE tipo_experiencia (
 CREATE TABLE experiencia (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	data_fim date NULL,
 	data_inicio date NOT NULL,
@@ -79,7 +81,7 @@ CREATE TABLE experiencia (
 CREATE TABLE formacao (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	data_fim date NULL,
 	data_inicio date NOT NULL,
@@ -94,7 +96,7 @@ CREATE TABLE formacao (
 CREATE TABLE idioma (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	idioma text NOT NULL,
 	nivel text NOT NULL,
@@ -106,7 +108,7 @@ CREATE TABLE idioma (
 CREATE TABLE usuario (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	cpf text NOT NULL UNIQUE,
 	email text NOT NULL UNIQUE,
@@ -122,7 +124,7 @@ CREATE TABLE usuario (
 CREATE TABLE vaga (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	data_limite date NOT NULL,
 	descricao text NOT NULL,
@@ -138,24 +140,31 @@ CREATE TABLE vaga (
 CREATE TABLE curso (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	ch_total int4 NULL,
 	nome text NOT NULL UNIQUE,
+	modalidade text NOT NULL,
 	semestres int4 NOT NULL,
 	empresa_id int8 NULL,
 	tipo_id int8 NOT NULL,
-	vaga_id int8 NULL,
 	CONSTRAINT curso_pkey PRIMARY KEY (id),
-	CONSTRAINT fk_curso_vaga_id FOREIGN KEY (vaga_id) REFERENCES vaga(id),
 	CONSTRAINT fk_curso_tipo_id FOREIGN KEY (tipo_id) REFERENCES tipo_curso(id),
 	CONSTRAINT fk_curso_empresa_id FOREIGN KEY (empresa_id) REFERENCES empresa(id)
+);
+
+CREATE TABLE vaga_curso (
+	vaga_id int8 NOT NULL,
+	curso_id int8 NOT NULL,
+	CONSTRAINT vaga_curso_pkey PRIMARY KEY (vaga_id, curso_id),
+	CONSTRAINT fk_vaga_curso_vaga_id FOREIGN KEY (vaga_id) REFERENCES vaga(id),
+	CONSTRAINT fk_vaga_curso_curso_id FOREIGN KEY (curso_id) REFERENCES curso(id)
 );
 
 CREATE TABLE funcionario (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	cargo text NOT NULL,
 	data_nascimento date NULL,
@@ -180,7 +189,7 @@ CREATE TABLE funcionario (
 CREATE TABLE historico_vaga (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	descricao text NULL,
 	status_id int8 NOT NULL,
@@ -193,7 +202,7 @@ CREATE TABLE historico_vaga (
 CREATE TABLE aluno (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	data_ingresso date NOT NULL,
 	data_nascimento date NOT NULL,
@@ -219,7 +228,7 @@ CREATE TABLE aluno_vaga (
 	aluno_id int8 NOT NULL,
 	vaga_id int8 NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	pontuacao int4 NULL,
 	status_id int8 NOT NULL,
@@ -232,7 +241,7 @@ CREATE TABLE aluno_vaga (
 CREATE TABLE vinculo_estagio (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	data_fim date NOT NULL,
 	data_inicio date NOT NULL,
@@ -246,7 +255,7 @@ CREATE TABLE vinculo_estagio (
 CREATE TABLE aditivo (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
-	atualizado_em timestamp NOT NULL,
+	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	data_fim date NOT NULL,
 	data_inicio date NOT NULL,

@@ -18,6 +18,8 @@ public class Empresa extends EntityBase implements Serializable {
 	
 	private String nome;
 	private String cnpj;
+	private String natureza;
+	private String representante;
 	private String email;
 	private String site;
 	private String telefone;

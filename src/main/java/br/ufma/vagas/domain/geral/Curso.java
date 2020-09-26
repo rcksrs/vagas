@@ -3,12 +3,11 @@ package br.ufma.vagas.domain.geral;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.ufma.vagas.domain.EntityBase;
-import br.ufma.vagas.domain.vaga.Vaga;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,14 +20,13 @@ public class Curso extends EntityBase implements Serializable {
 	private Integer chTotal;
 	private Integer semestres;
 	
+	@Enumerated(EnumType.STRING)
+	private Modalidade modalidade;
+	
 	@ManyToOne
 	private TipoCurso tipo;
 	
 	@ManyToOne
 	private Empresa empresa;
-	
-	@ManyToOne
-	@JsonIgnore
-	private Vaga vaga;
 
 }

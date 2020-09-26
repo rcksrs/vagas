@@ -5,8 +5,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import br.ufma.vagas.domain.EntityBase;
 import br.ufma.vagas.domain.geral.Curso;
@@ -31,7 +33,10 @@ public class Vaga extends EntityBase implements Serializable {
 	@ManyToOne
 	private Empresa empresa;
 	
-	@OneToMany(mappedBy = "vaga")
+	@ManyToMany
+	@JoinTable(name = "vaga_curso", 
+		joinColumns = @JoinColumn(name="vaga_id"),
+		inverseJoinColumns = @JoinColumn(name="curso_id"))
 	private List<Curso> cursos;
 
 }
