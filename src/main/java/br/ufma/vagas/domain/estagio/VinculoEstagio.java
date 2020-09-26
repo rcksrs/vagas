@@ -3,7 +3,9 @@ package br.ufma.vagas.domain.estagio;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -25,7 +27,8 @@ public class VinculoEstagio extends EntityBase {
 	@ManyToOne
 	private Empresa empresa;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "vinculo_estagio_id")
 	private List<Aditivo> aditivos;
 
 }

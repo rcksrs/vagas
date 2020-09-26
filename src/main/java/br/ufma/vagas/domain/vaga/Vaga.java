@@ -28,7 +28,7 @@ public class Vaga extends EntityBase {
 	@ManyToOne
 	private Empresa empresa;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "vaga")
 	private List<Curso> cursos;
 
 }

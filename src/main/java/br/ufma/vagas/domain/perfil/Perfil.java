@@ -2,7 +2,9 @@ package br.ufma.vagas.domain.perfil;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import br.ufma.vagas.domain.EntityBase;
@@ -16,13 +18,16 @@ public class Perfil extends EntityBase {
 	private String urlLattes;
 	private String urlImagem;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "perfil_id")
 	private List<Experiencia> experiencias;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "perfil_id")
 	private List<Formacao> formacoes;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "perfil_id")
 	private List<Idioma> idiomas;
 
 }
