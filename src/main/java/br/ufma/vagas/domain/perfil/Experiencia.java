@@ -2,10 +2,15 @@ package br.ufma.vagas.domain.perfil;
 
 import java.time.LocalDate;
 
-import br.ufma.vagas.domain.EntityBase;
-import lombok.Data;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
-@Data
+import br.ufma.vagas.domain.EntityBase;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Getter @Setter
 public class Experiencia extends EntityBase {
 	private String titulo;
 	private String descricao;
@@ -13,6 +18,8 @@ public class Experiencia extends EntityBase {
 	private String local;
 	private LocalDate dataInicio;
 	private LocalDate dataFim;
-	private TipoExperiencia tipo;	
+	
+	@ManyToOne
+	private TipoExperiencia tipo;
 
 }

@@ -1,8 +1,11 @@
 package br.ufma.vagas.domain.geral;
 
+import javax.persistence.Embeddable;
+
 import lombok.Data;
 
 @Data
+@Embeddable
 public class Endereco {
 	private String cep;
 	private String pais;

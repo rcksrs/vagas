@@ -1,11 +1,14 @@
 package br.ufma.vagas.domain.perfil;
 
-public enum TipoExperiencia {
-	TRABALHO,
-	CURSO_ONLINE,
-	CURSO_PRESENCIAL,
-	ESTAGIO,
-	EVENTO,
-	PROJETO
+import javax.persistence.Entity;
+
+import br.ufma.vagas.domain.EntityBase;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Getter @Setter
+public class TipoExperiencia extends EntityBase {
+	private String descricao;
 	
 }

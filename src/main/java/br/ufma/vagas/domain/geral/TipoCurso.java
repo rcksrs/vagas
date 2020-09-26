@@ -1,15 +1,13 @@
 package br.ufma.vagas.domain.geral;
 
-public enum TipoCurso {
-	DOUTORADO,
-	MESTRADO,
-	ESPECIALIZACAO,
-	MBA,
-	BACHARELADO,
-	LICENCIATURA,
-	TECNOLOGO,
-	TECNICO,
-	MEDIO_TECNICO,
-	ENS_MEDIO,
-	ENS_FUNDAMENTAL
+import javax.persistence.Entity;
+
+import br.ufma.vagas.domain.EntityBase;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Getter @Setter
+public class TipoCurso extends EntityBase {
+	private String descricao;
 }
