@@ -1,5 +1,6 @@
 package br.ufma.vagas.domain.perfil;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -11,7 +12,9 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Experiencia extends EntityBase {
+public class Experiencia extends EntityBase implements Serializable {
+	private static final long serialVersionUID = 5900590538696076997L;
+	
 	private String titulo;
 	private String descricao;
 	private String urlComprovante;

@@ -1,5 +1,6 @@
 package br.ufma.vagas.domain.perfil;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,7 +14,9 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Perfil extends EntityBase {
+public class Perfil extends EntityBase implements Serializable {
+	private static final long serialVersionUID = 4923260792812529690L;
+	
 	private String resumo;
 	private String urlLattes;
 	private String urlImagem;

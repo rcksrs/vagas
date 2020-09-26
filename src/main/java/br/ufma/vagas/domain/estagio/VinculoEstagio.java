@@ -1,5 +1,6 @@
 package br.ufma.vagas.domain.estagio;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,7 +18,9 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class VinculoEstagio extends EntityBase {
+public class VinculoEstagio extends EntityBase implements Serializable{
+	private static final long serialVersionUID = -9017735405928874520L;
+	
 	private LocalDate dataInicio;
 	private LocalDate dataFim;
 	

@@ -1,5 +1,6 @@
 package br.ufma.vagas.domain.vaga;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,9 +17,11 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Vaga extends EntityBase {
+public class Vaga extends EntityBase implements Serializable {
+	private static final long serialVersionUID = 5275967908923321137L;
+	
 	private String titulo;
-	private String desricao;
+	private String descricao;
 	private Integer vagas;
 	private LocalDate dataLimite;
 	

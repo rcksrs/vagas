@@ -3,6 +3,13 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: vagas
+  flyway:
+    enabled: true
+    schemas: vagas
+    validate-on-migrate: false
+    baseline-on-migrate: true
+    baseline-version: 0    table: vagas_schema_history
 
   profiles:
     active: dev
@@ -19,7 +26,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
 
 ---
 

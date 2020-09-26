@@ -1,12 +1,16 @@
 package br.ufma.vagas.domain.geral;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 
 import lombok.Data;
 
 @Data
 @Embeddable
-public class Endereco {
+public class Endereco implements Serializable {
+	private static final long serialVersionUID = 2442805561440142624L;
+	
 	private String cep;
 	private String pais;
 	private String estado;

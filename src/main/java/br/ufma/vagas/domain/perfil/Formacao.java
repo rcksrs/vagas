@@ -1,5 +1,6 @@
 package br.ufma.vagas.domain.perfil;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -12,7 +13,9 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Formacao extends EntityBase {
+public class Formacao extends EntityBase implements Serializable {
+	private static final long serialVersionUID = -4257936033479972405L;
+	
 	private String local;
 	private LocalDate dataInicio;
 	private LocalDate dataFim;

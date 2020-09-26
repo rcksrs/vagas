@@ -1,5 +1,6 @@
 package br.ufma.vagas.domain.geral;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Embedded;
@@ -13,7 +14,9 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Aluno extends EntityBase {
+public class Aluno extends EntityBase implements Serializable {
+	private static final long serialVersionUID = -2546938448239522253L;
+	
 	private String nome;
 	private String matricula;
 	private LocalDate dataNascimento;

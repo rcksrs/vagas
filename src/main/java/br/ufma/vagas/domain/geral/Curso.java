@@ -1,5 +1,7 @@
 package br.ufma.vagas.domain.geral;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -12,10 +14,12 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Curso extends EntityBase {
+public class Curso extends EntityBase implements Serializable {
+	private static final long serialVersionUID = 947975858196655768L;
+	
 	private String nome;
 	private Integer chTotal;
-	private Float semestres;
+	private Integer semestres;
 	
 	@ManyToOne
 	private TipoCurso tipo;
