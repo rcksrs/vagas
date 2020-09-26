@@ -106,3 +106,15 @@ INSERT INTO curso (ativo, atualizado_em, criado_em, ch_total, nome, modalidade, 
     (true, NULL, '2020-09-26 13:03:00.000', 0, 'TURISMO', 'PRESENCIAL', 0, 1, 5),
     (true, NULL, '2020-09-26 13:03:00.000', 0, 'ZOOTECNIA', 'PRESENCIAL', 0, 1, 5);
 
+INSERT INTO status (ativo, atualizado_em, criado_em, descricao, tipo) VALUES 
+    (true, NULL, '2020-09-26 17:45:00.000', 'INSCRITO', 'SELECAO_ALUNO'),
+    (true, NULL, '2020-09-26 17:45:00.000', 'SELECIONADO', 'SELECAO_ALUNO'),
+    (true, NULL, '2020-09-26 17:45:00.000', 'DESCLASSIFICADO', 'SELECAO_ALUNO'),
+    (true, NULL, '2020-09-26 17:45:00.000', 'EM ESPERA', 'SELECAO_ALUNO'),
+    (true, NULL, '2020-09-26 17:45:00.000', 'RECURSO', 'SELECAO_ALUNO'),
+    (true, NULL, '2020-09-26 17:45:00.000', 'INSCRIÇÃO CANCELADA', 'SELECAO_ALUNO'),
+    (true, NULL, '2020-09-26 17:45:00.000', 'EM ABERTO', 'HISTORICO_VAGA'),
+    (true, NULL, '2020-09-26 17:45:00.000', 'CANCELADA', 'HISTORICO_VAGA'),
+    (true, NULL, '2020-09-26 17:45:00.000', 'FINALIZADA', 'HISTORICO_VAGA'),
+    (true, NULL, '2020-09-26 17:45:00.000', 'PERÍODO RECURSO', 'HISTORICO_VAGA'),
+    (true, NULL, '2020-09-26 17:45:00.000', 'REABERTA', 'HISTORICO_VAGA');
