@@ -3,7 +3,7 @@ CREATE TABLE empresa (
 	ativo bool NOT NULL,
 	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
-	cnpj text NOT NULL,
+	cnpj text NOT NULL UNIQUE,
 	email text NOT NULL,
 	bairro text NULL,
 	cep text NOT NULL,
@@ -39,6 +39,7 @@ CREATE TABLE status (
 	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	descricao text NOT NULL UNIQUE,
+	tipo text NOT NULL,
 	CONSTRAINT status_pkey PRIMARY KEY (id)
 );
 

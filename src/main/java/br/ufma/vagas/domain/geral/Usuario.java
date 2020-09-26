@@ -2,6 +2,7 @@ package br.ufma.vagas.domain.geral;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -22,7 +23,7 @@ public class Usuario extends EntityBase implements Serializable {
 	private Boolean telefoneConfirmado;
 	private String senha;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Perfil perfil;
 
 }

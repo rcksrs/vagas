@@ -33,8 +33,9 @@ public class AlunoVaga implements Serializable {
 
 @Embeddable
 @Getter @Setter
-class AlunoVagaId {
-	
+class AlunoVagaId implements Serializable {
+	private static final long serialVersionUID = 4151742404163682369L;
+
 	@OneToOne
 	private Aluno aluno;
 	

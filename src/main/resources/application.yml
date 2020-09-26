@@ -9,7 +9,8 @@ spring:
     schemas: vagas
     validate-on-migrate: false
     baseline-on-migrate: true
-    baseline-version: 0    table: vagas_schema_history
+    baseline-version: 0
+    table: vagas_schema_history
 
   profiles:
     active: dev

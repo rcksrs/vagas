@@ -1,11 +1,9 @@
 package br.ufma.vagas.domain.geral;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
 import br.ufma.vagas.domain.EntityBase;
 import lombok.Getter;
@@ -26,8 +24,5 @@ public class Empresa extends EntityBase implements Serializable {
 	
 	@Embedded
 	private Endereco endereco;
-	
-	@OneToMany(mappedBy = "empresa")
-	private List<Funcionario> funcionarios;
 
 }

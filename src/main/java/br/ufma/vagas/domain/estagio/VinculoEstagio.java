@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -30,8 +29,7 @@ public class VinculoEstagio extends EntityBase implements Serializable{
 	@ManyToOne
 	private Empresa empresa;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "vinculo_estagio_id")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vinculoEstagio")
 	private List<Aditivo> aditivos;
 
 }

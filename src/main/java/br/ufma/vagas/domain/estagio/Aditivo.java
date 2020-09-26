@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.ufma.vagas.domain.EntityBase;
 import lombok.Getter;
@@ -18,5 +21,9 @@ public class Aditivo extends EntityBase implements Serializable {
 	private String observacao;
 	private LocalDate dataInicio;
 	private LocalDate dataFim;
+	
+	@ManyToOne
+	@JsonIgnore
+	private VinculoEstagio vinculoEstagio;
 
 }
