@@ -29,16 +29,16 @@ public class AlunoVaga implements Serializable {
 	@ManyToOne
 	private Status status;
 
+	@Embeddable
+	@Getter @Setter
+	public static class AlunoVagaId implements Serializable {
+		private static final long serialVersionUID = 4151742404163682369L;
+		
+		@OneToOne
+		private Aluno aluno;
+		
+		@OneToOne
+		private Vaga vaga;
+	}
 }
 
-@Embeddable
-@Getter @Setter
-class AlunoVagaId implements Serializable {
-	private static final long serialVersionUID = 4151742404163682369L;
-
-	@OneToOne
-	private Aluno aluno;
-	
-	@OneToOne
-	private Vaga vaga;
-}

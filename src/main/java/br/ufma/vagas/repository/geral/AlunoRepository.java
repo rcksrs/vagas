@@ -8,7 +8,7 @@ import br.ufma.vagas.repository.RepositoryBase;
 
 public interface AlunoRepository extends RepositoryBase<Aluno> {
 	Optional<Aluno> findByMatricula(String matricula);
-	List<Aluno> findByNomeContaining(String nome);
+	List<Aluno> findByNomeContainingIgnoreCase(String nome);
 	List<Aluno> findByCursoId(Long cursoId);
 
 }

@@ -6,6 +6,6 @@ import br.ufma.vagas.domain.geral.Curso;
 import br.ufma.vagas.repository.RepositoryBase;
 
 public interface CursoRepository extends RepositoryBase<Curso> {
-	List<Curso> findByNomeContaining(String nome);
+	List<Curso> findByNomeContainingIgnoreCase(String nome);
 
 }
