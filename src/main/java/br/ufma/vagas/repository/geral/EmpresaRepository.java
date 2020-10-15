@@ -8,6 +8,7 @@ import br.ufma.vagas.repository.RepositoryBase;
 
 public interface EmpresaRepository extends RepositoryBase<Empresa> {
 	Optional<Empresa> findByCnpj(String cnpj);
+	Optional<Empresa> findByIdAndCnpj(Long id, String cnpj);
 	List<Empresa> findByNomeContainingIgnoreCase(String nome);
 
 }

@@ -1,5 +1,6 @@
 package br.ufma.vagas.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,13 @@ public abstract class ServiceBase<E extends EntityBase, R extends RepositoryBase
 	}	
 	
 	public E salvar(E entity) {
+		entity.setAtivo(true);
+		entity.setCriadoEm(LocalDateTime.now());
+		return repository.save(entity);
+	}
+	
+	public E editar(E entity) {
+		entity.setAtualizadoEm(LocalDateTime.now());
 		return repository.save(entity);
 	}
 	
