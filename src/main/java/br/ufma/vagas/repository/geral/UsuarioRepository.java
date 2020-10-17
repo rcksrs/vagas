@@ -8,5 +8,6 @@ import br.ufma.vagas.repository.RepositoryBase;
 public interface UsuarioRepository extends RepositoryBase<Usuario> {
 	Optional<Usuario> findByCpf(String cpf);
 	Optional<Usuario> findByEmail(String email);
+	Optional<Usuario> findByIdAndCpf(Long id, String cpf);
 
 }
