@@ -7,8 +7,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.ufma.vagas.domain.EntityBase;
+import br.ufma.vagas.domain.geral.Usuario;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +24,10 @@ public class Perfil extends EntityBase implements Serializable {
 	private String resumo;
 	private String urlLattes;
 	private String urlImagem;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "perfil")
+	private Usuario usuario;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "perfil_id")
