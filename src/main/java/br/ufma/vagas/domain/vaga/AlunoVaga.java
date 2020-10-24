@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import br.ufma.vagas.domain.geral.Aluno;
@@ -21,13 +20,11 @@ public class AlunoVaga implements Serializable {
 	private LocalDateTime criadoEm;
 	private LocalDateTime atualizadoEm;
 	private Boolean ativo;
+	private Boolean selecionado;
 	private Integer pontuacao;
 	
 	@EmbeddedId
 	private AlunoVagaId id;
-	
-	@ManyToOne
-	private Status status;
 
 	@Embeddable
 	@Getter @Setter

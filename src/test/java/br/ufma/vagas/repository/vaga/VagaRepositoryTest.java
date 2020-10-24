@@ -21,7 +21,7 @@ class VagaRepositoryTest {
 	@Test
 	@DisplayName("Deve retornar uma lista de vagas ao buscar por um intervalo de datas")
 	void testFindByDataLimiteBetween() {
-		var vagas = vagaRepository.findByDataLimiteBetween(LocalDate.of(2020, 10, 1), LocalDate.of(2020, 11, 1));
+		var vagas = vagaRepository.findByEncerramentoBetween(LocalDate.of(2020, 10, 1), LocalDate.of(2020, 12, 1));
 		assertFalse(vagas.isEmpty());
 	}
 

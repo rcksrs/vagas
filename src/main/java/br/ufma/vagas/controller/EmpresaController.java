@@ -34,7 +34,7 @@ public class EmpresaController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Empresa> obterPorId(Long id) {
+	public ResponseEntity<Empresa> obterPorId(@PathVariable Long id) {
 		var empresa = empresaService.obterPorId(id);
 		return ResponseEntity.ok(empresa);
 	}

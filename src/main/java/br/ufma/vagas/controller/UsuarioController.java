@@ -32,13 +32,13 @@ public class UsuarioController {
 	private PerfilService perfilService;
 	
 	@GetMapping
-	public ResponseEntity<Page<Usuario>> obterTodos(@PageableDefault(sort = "nome", size = 20) Pageable pageable) {
+	public ResponseEntity<Page<Usuario>> obterTodos(@PageableDefault(sort = "id", size = 20) Pageable pageable) {
 		var usuarios = usuarioService.obterTodos(pageable);
 		return ResponseEntity.ok(usuarios);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Usuario> obterPorId(Long id) {
+	public ResponseEntity<Usuario> obterPorId(@PathVariable Long id) {
 		var usuario = usuarioService.obterPorId(id);
 		return ResponseEntity.ok(usuario);
 	}

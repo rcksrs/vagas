@@ -34,7 +34,7 @@ public class AlunoController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Aluno> obterPorId(Long id) {
+	public ResponseEntity<Aluno> obterPorId(@PathVariable Long id) {
 		var aluno = alunoService.obterPorId(id);
 		return ResponseEntity.ok(aluno);
 	}

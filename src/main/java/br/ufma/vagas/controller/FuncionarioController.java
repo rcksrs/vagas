@@ -34,7 +34,7 @@ public class FuncionarioController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Funcionario> obterPorId(Long id) {
+	public ResponseEntity<Funcionario> obterPorId(@PathVariable Long id) {
 		var funcionario = funcionarioService.obterPorId(id);
 		return ResponseEntity.ok(funcionario);
 	}

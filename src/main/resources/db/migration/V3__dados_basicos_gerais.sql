@@ -22,14 +22,10 @@ INSERT INTO vinculo_estagio (ativo, atualizado_em, criado_em, data_fim, data_ini
     (true,NULL,'2020-10-05 00:00:00.000','2021-01-01','2020-01-01',1,1)
 ;
 
-INSERT INTO vaga (ativo, atualizado_em, criado_em, data_limite, descricao, titulo, vagas, empresa_id, tipo_id) VALUES 
-    (true,NULL,'2020-10-05 00:00:00.000','2020-11-01','Nunc interdum pretium elit, eget sollicitudin nulla vestibulum in. Etiam mollis sit amet est at pellentesque.','Vestibulum quis mauris vel dui condimentum',10,1,1)
+INSERT INTO vaga (ativo, atualizado_em, criado_em, abertura, encerramento, descricao, titulo, vagas, empresa_id, tipo_id) VALUES 
+    (true,NULL,'2020-10-05 00:00:00.000','2020-11-01','2020-12-01','Nunc interdum pretium elit, eget sollicitudin nulla vestibulum in. Etiam mollis sit amet est at pellentesque.','Vestibulum quis mauris vel dui condimentum',10,1,1)
 ;
 
-INSERT INTO aluno_vaga (aluno_id, vaga_id, ativo, atualizado_em, criado_em, pontuacao, status_id) VALUES 
-    (1,1,true,NULL,'2020-10-05 00:00:00.000',NULL,1)
-;
-
-INSERT INTO historico_vaga (ativo, atualizado_em, criado_em, descricao, status_id, vaga_id) VALUES 
-    (true,NULL,'2020-10-05 00:00:00.000','Vestibulum quis mauris vel dui condimentum semper at sit amet justo.',7,1)
+INSERT INTO aluno_vaga (aluno_id, vaga_id, ativo, atualizado_em, criado_em, pontuacao, selecionado) VALUES 
+    (1,1,true,NULL,'2020-10-05 00:00:00.000',NULL,false)
 ;

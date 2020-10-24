@@ -33,16 +33,6 @@ CREATE TABLE perfil (
 	CONSTRAINT perfil_pkey PRIMARY KEY (id)
 );
 
-CREATE TABLE status (
-	id bigserial NOT NULL,
-	ativo bool NOT NULL,
-	atualizado_em timestamp NULL,
-	criado_em timestamp NOT NULL,
-	descricao text NOT NULL UNIQUE,
-	tipo text NOT NULL,
-	CONSTRAINT status_pkey PRIMARY KEY (id)
-);
-
 CREATE TABLE tipo_curso (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
@@ -127,7 +117,8 @@ CREATE TABLE vaga (
 	ativo bool NOT NULL,
 	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
-	data_limite date NOT NULL,
+	abertura date NOT NULL,
+	encerramento date NOT NULL,
 	descricao text NOT NULL,
 	titulo text NOT NULL,
 	vagas int4 NULL,
@@ -187,19 +178,6 @@ CREATE TABLE funcionario (
 	CONSTRAINT fk_funcionario_usuario_id FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 );
 
-CREATE TABLE historico_vaga (
-	id bigserial NOT NULL,
-	ativo bool NOT NULL,
-	atualizado_em timestamp NULL,
-	criado_em timestamp NOT NULL,
-	descricao text NULL,
-	status_id int8 NOT NULL,
-	vaga_id int8 NOT NULL,
-	CONSTRAINT historico_vaga_pkey PRIMARY KEY (id),
-	CONSTRAINT fk_historico_vaga_vaga_id FOREIGN KEY (vaga_id) REFERENCES vaga(id),
-	CONSTRAINT fk_historico_vaga_status_id FOREIGN KEY (status_id) REFERENCES status(id)
-);
-
 CREATE TABLE aluno (
 	id bigserial NOT NULL,
 	ativo bool NOT NULL,
@@ -232,11 +210,10 @@ CREATE TABLE aluno_vaga (
 	atualizado_em timestamp NULL,
 	criado_em timestamp NOT NULL,
 	pontuacao int4 NULL,
-	status_id int8 NOT NULL,
+	selecionado bool NOT NULL,
 	CONSTRAINT aluno_vaga_pkey PRIMARY KEY (aluno_id, vaga_id),
 	CONSTRAINT fk_aluno_vaga_aluno_id FOREIGN KEY (aluno_id) REFERENCES aluno(id),
-	CONSTRAINT fk_aluno_vaga_vaga_id FOREIGN KEY (vaga_id) REFERENCES vaga(id),
-	CONSTRAINT fk_aluno_vaga_status_id FOREIGN KEY (status_id) REFERENCES status(id)
+	CONSTRAINT fk_aluno_vaga_vaga_id FOREIGN KEY (vaga_id) REFERENCES vaga(id)
 );
 
 CREATE TABLE vinculo_estagio (

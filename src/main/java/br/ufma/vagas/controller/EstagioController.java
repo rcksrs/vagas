@@ -28,13 +28,13 @@ public class EstagioController {
 	private EstagioService estagioService;
 	
 	@GetMapping
-	public ResponseEntity<Page<VinculoEstagio>> obterTodos(@PageableDefault(sort = "nome", size = 20) Pageable pageable) {
+	public ResponseEntity<Page<VinculoEstagio>> obterTodos(@PageableDefault(sort = "dataInicio", size = 10) Pageable pageable) {
 		var estagios = estagioService.obterTodos(pageable);
 		return ResponseEntity.ok(estagios);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<VinculoEstagio> obterPorId(Long id) {
+	public ResponseEntity<VinculoEstagio> obterPorId(@PathVariable Long id) {
 		var estagio = estagioService.obterPorId(id);
 		return ResponseEntity.ok(estagio);
 	}

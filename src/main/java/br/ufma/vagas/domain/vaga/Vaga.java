@@ -25,7 +25,8 @@ public class Vaga extends EntityBase implements Serializable {
 	private String titulo;
 	private String descricao;
 	private Integer vagas;
-	private LocalDate dataLimite;
+	private LocalDate abertura;
+	private LocalDate encerramento;
 	
 	@ManyToOne
 	private TipoExperiencia tipo;

@@ -34,7 +34,7 @@ public class CursoController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Curso> obterPorId(Long id) {
+	public ResponseEntity<Curso> obterPorId(@PathVariable Long id) {
 		var curso = cursoService.obterPorId(id);
 		return ResponseEntity.ok(curso);
 	}
