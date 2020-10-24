@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.ufma.vagas.domain.geral.Aluno;
-import br.ufma.vagas.domain.vaga.AlunoVaga;
+import br.ufma.vagas.domain.vaga.AlunoVaga.AlunoVagaId;
 import br.ufma.vagas.domain.vaga.Vaga;
 
 @SpringBootTest
@@ -51,9 +51,7 @@ class AlunoVagaRepositoryTest {
 		var vaga = new Vaga();
 		vaga.setId(1L);
 		
-		var id = new AlunoVaga.AlunoVagaId();
-		id.setAluno(aluno);
-		id.setVaga(vaga);
+		var id = AlunoVagaId.builder().aluno(aluno).vaga(vaga).build();
 		
 		var alunoVaga = alunoVagaRepository.findById(id);
 		assertTrue(alunoVaga.isPresent());

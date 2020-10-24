@@ -1,23 +1,32 @@
 package br.ufma.vagas.service.vaga;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.ufma.vagas.domain.vaga.AlunoVaga;
+import br.ufma.vagas.domain.vaga.AlunoVaga.AlunoVagaId;
 import br.ufma.vagas.domain.vaga.Vaga;
+import br.ufma.vagas.exception.BusinessException;
 import br.ufma.vagas.exception.ResourceNotFoundException;
+import br.ufma.vagas.repository.geral.AlunoRepository;
 import br.ufma.vagas.repository.vaga.AlunoVagaRepository;
 import br.ufma.vagas.repository.vaga.VagaRepository;
 import br.ufma.vagas.service.ServiceBase;
 
 @Service
 public class VagaService extends ServiceBase<Vaga, VagaRepository> {
-		
+	
 	@Autowired
 	private AlunoVagaRepository alunoVagaRepository;
+	
+	@Autowired
+	private AlunoRepository alunoRepository;
 	
 	public List<Vaga> filtrarPorData(LocalDate dataInicial, LocalDate dataFinal) {
 		return repository.findByEncerramentoBetween(dataInicial, dataFinal);
@@ -41,6 +50,38 @@ public class VagaService extends ServiceBase<Vaga, VagaRepository> {
 	
 	public List<AlunoVaga> obterAlunosPorVaga(Long vagaId) {
 		return alunoVagaRepository.findByIdVagaId(vagaId);
+	}
+	
+	public AlunoVaga candidatar(Long alunoId, Long vagaId) {
+		var alunoSalvo = alunoRepository.findById(alunoId).orElseThrow(() -> new ResourceNotFoundException("O aluno informado não foi encontrado na base de dados"));
+		var vagaSalva = repository.findById(vagaId).orElseThrow(() -> new ResourceNotFoundException("A vaga informada não foi encontrada na base de dados"));
+		
+		var periodo = vagaSalva.getAbertura().isBefore(LocalDate.now().plusDays(1L)) && vagaSalva.getEncerramento().isAfter(LocalDate.now().minusDays(1L));
+		if(!periodo) throw new BusinessException("O período de inscrição para esta vaga encerrou");
+		
+		var curso = vagaSalva.getCursos().stream().filter(c -> c.getId() == alunoSalvo.getCurso().getId()).count() == 0;
+		if(curso) throw new BusinessException("O aluno não possui nenhum dos cursos requisitados pela vaga");
+		
+		var alunoVaga = AlunoVaga.builder()
+				.ativo(true)
+				.criadoEm(LocalDateTime.now())
+				.selecionado(false)
+				.pontuacao(0)
+				.id(AlunoVagaId.builder().aluno(alunoSalvo).vaga(vagaSalva).build())
+				.build();
+		return alunoVagaRepository.save(alunoVaga);
+	}
+	
+	@Override
+	public Page<Vaga> obterTodos(Pageable pageable) {
+		return repository.findByEncerramentoAfter(LocalDate.now().minusDays(1L), pageable);
+	}
+	
+	@Override
+	public void remover(Vaga vaga) {
+		var vagaSalva = repository.findById(vaga.getId()).orElseThrow(ResourceNotFoundException::new);
+		if(alunoVagaRepository.findByIdVagaId(vagaSalva.getId()).size() > 0) throw new BusinessException("Não é possível remover uma vaga com candidatos");
+		repository.deleteById(vagaSalva.getId());
 	}
 
 }
