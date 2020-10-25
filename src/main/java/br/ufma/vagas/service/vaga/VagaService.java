@@ -54,13 +54,15 @@ public class VagaService extends ServiceBase<Vaga, VagaRepository> {
 	
 	public AlunoVaga candidatar(Long alunoId, Long vagaId) {
 		var alunoSalvo = alunoRepository.findById(alunoId).orElseThrow(() -> new ResourceNotFoundException("O aluno informado não foi encontrado na base de dados"));
+		if(!alunoSalvo.getUsuario().getEmailConfirmado()) throw new BusinessException("Confirme o email cadastrado antes de realizar a inscrição");
+		
 		var vagaSalva = repository.findById(vagaId).orElseThrow(() -> new ResourceNotFoundException("A vaga informada não foi encontrada na base de dados"));
+				
+		var validarPeriodo = vagaSalva.getAbertura().isBefore(LocalDate.now().plusDays(1L)) && vagaSalva.getEncerramento().isAfter(LocalDate.now().minusDays(1L));
+		if(!validarPeriodo) throw new BusinessException("O período de inscrição para esta vaga encerrou");
 		
-		var periodo = vagaSalva.getAbertura().isBefore(LocalDate.now().plusDays(1L)) && vagaSalva.getEncerramento().isAfter(LocalDate.now().minusDays(1L));
-		if(!periodo) throw new BusinessException("O período de inscrição para esta vaga encerrou");
-		
-		var curso = vagaSalva.getCursos().stream().filter(c -> c.getId() == alunoSalvo.getCurso().getId()).count() == 0;
-		if(curso) throw new BusinessException("O aluno não possui nenhum dos cursos requisitados pela vaga");
+		var validarCurso = vagaSalva.getCursos().size() == 0 || vagaSalva.getCursos().stream().filter(c -> c.getId() == alunoSalvo.getCurso().getId()).count() != 0;
+		if(!validarCurso) throw new BusinessException("O aluno não possui nenhum dos cursos requisitados pela vaga");
 		
 		var alunoVaga = AlunoVaga.builder()
 				.ativo(true)
@@ -69,7 +71,10 @@ public class VagaService extends ServiceBase<Vaga, VagaRepository> {
 				.pontuacao(0)
 				.id(AlunoVagaId.builder().aluno(alunoSalvo).vaga(vagaSalva).build())
 				.build();
-		return alunoVagaRepository.save(alunoVaga);
+		var alunoVagaSalvo = alunoVagaRepository.save(alunoVaga);
+		
+		//TODO: enviar email de confirmação ao aluno
+		return alunoVagaSalvo;
 	}
 	
 	@Override

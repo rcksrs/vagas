@@ -22,7 +22,7 @@ public abstract class ServiceBase<E extends EntityBase, R extends RepositoryBase
 	}
 	
 	public List<E> obterTodos() {
-		return repository.findAll();
+		return repository.findByAtivoTrue();
 	}
 	
 	public List<E> obterTodos(Example<E> example) {
@@ -30,7 +30,7 @@ public abstract class ServiceBase<E extends EntityBase, R extends RepositoryBase
 	}
 	
 	public Page<E> obterTodos(Pageable pageable) {
-		return repository.findAll(pageable);
+		return repository.findByAtivoTrue(pageable);
 	}	
 	
 	public E salvar(E entity) {

@@ -2,6 +2,8 @@ package br.ufma.vagas.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -58,20 +60,20 @@ public class AlunoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Aluno> salvar(@RequestBody Aluno aluno) {
+	public ResponseEntity<Aluno> salvar(@RequestBody @Valid Aluno aluno) {
 		var alunoSalvo = alunoService.salvar(aluno);
 		var uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(alunoSalvo.getId()).toUri();
 		return ResponseEntity.created(uri).body(alunoSalvo);
 	}
 	
 	@PutMapping
-	public ResponseEntity<Aluno> editar(@RequestBody Aluno aluno) {
+	public ResponseEntity<Aluno> editar(@RequestBody @Valid Aluno aluno) {
 		var alunoSalvo = alunoService.editar(aluno);
 		return ResponseEntity.ok(alunoSalvo);	
 	}
 	
 	@DeleteMapping
-	public ResponseEntity<?> remover(@RequestBody Aluno aluno) {
+	public ResponseEntity<?> remover(@RequestBody @Valid Aluno aluno) {
 		alunoService.remover(aluno);
 		return ResponseEntity.ok().build();
 	}

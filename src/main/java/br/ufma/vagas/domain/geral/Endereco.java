@@ -3,15 +3,22 @@ package br.ufma.vagas.domain.geral;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 @Embeddable
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 2442805561440142624L;
 	
+	@NotBlank(message = "O preenchimento deste campo é obrigatório")
+	@Size(min = 8, max = 8, message = "Informe um CEP válido")
 	private String cep;
+	
 	private String pais;
 	private String estado;
 	private String cidade;
