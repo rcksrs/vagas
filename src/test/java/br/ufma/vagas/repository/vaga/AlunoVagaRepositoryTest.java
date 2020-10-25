@@ -51,7 +51,7 @@ class AlunoVagaRepositoryTest {
 		var vaga = new Vaga();
 		vaga.setId(1L);
 		
-		var id = AlunoVagaId.builder().aluno(aluno).vaga(vaga).build();
+		var id = new AlunoVagaId(aluno, vaga);
 		
 		var alunoVaga = alunoVagaRepository.findById(id);
 		assertTrue(alunoVaga.isPresent());

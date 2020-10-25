@@ -2,6 +2,8 @@ package br.ufma.vagas.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -52,7 +54,7 @@ public class EstagioController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<VinculoEstagio> salvar(@RequestBody VinculoEstagio estagio) {
+	public ResponseEntity<VinculoEstagio> salvar(@RequestBody @Valid VinculoEstagio estagio) {
 		//TODO: verificar se o aluno e a empresa informados existem
 		var estagioSalvo = estagioService.salvar(estagio);
 		var uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(estagioSalvo.getId()).toUri();
@@ -60,13 +62,13 @@ public class EstagioController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<VinculoEstagio> editar(@RequestBody VinculoEstagio estagio) {
+	public ResponseEntity<VinculoEstagio> editar(@RequestBody @Valid VinculoEstagio estagio) {
 		var estagioSalvo = estagioService.editar(estagio);
 		return ResponseEntity.ok(estagioSalvo);	
 	}
 	
 	@DeleteMapping
-	public ResponseEntity<?> remover(@RequestBody VinculoEstagio estagio) {
+	public ResponseEntity<?> remover(@RequestBody @Valid VinculoEstagio estagio) {
 		estagioService.remover(estagio);
 		return ResponseEntity.ok().build();
 	}

@@ -45,20 +45,16 @@ class AlunoControllerTest {
 	private static ObjectMapper mapper;
 	
 	private static Aluno aluno;
-	private static Curso curso;
-	private static Usuario usuario;
+	private static Endereco endereco;
 	
 	@BeforeAll
 	static void beforeAll() {
 		mapper = new ObjectMapper();
 		mapper.registerModule(new JavaTimeModule());
 		mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-		
-		curso = new Curso();
-		curso.setId(1L);
-		
-		usuario = new Usuario();
-		usuario.setId(1L);
+				
+		endereco = new Endereco();
+		endereco.setCep("65000000");
 		
 		aluno = new Aluno();
 		aluno.setId(1L);
@@ -66,9 +62,9 @@ class AlunoControllerTest {
 		aluno.setNome("Lorem Ipsum");
 		aluno.setDataNascimento(LocalDate.of(2000, 10, 1));
 		aluno.setDataIngresso(LocalDate.of(2020, 1, 1));
-		aluno.setEndereco(Endereco.builder().cep("65000000").build());
-		aluno.setCurso(curso);
-		aluno.setUsuario(usuario);
+		aluno.setEndereco(endereco);
+		aluno.setCurso(new Curso());
+		aluno.setUsuario(new Usuario());
 	}
 
 	@Test
@@ -103,9 +99,9 @@ class AlunoControllerTest {
 		novoAluno.setNome("Lorem Ipsum");
 		novoAluno.setDataNascimento(LocalDate.of(2000, 10, 1));
 		novoAluno.setDataIngresso(LocalDate.of(2020, 1, 1));
-		novoAluno.setEndereco(Endereco.builder().cep("65000000").build());
-		novoAluno.setCurso(curso);
-		novoAluno.setUsuario(usuario);
+		novoAluno.setEndereco(endereco);
+		novoAluno.setCurso(new Curso());
+		novoAluno.setUsuario(new Usuario());
 		
 		mockMvc.perform(post("/aluno")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -123,9 +119,6 @@ class AlunoControllerTest {
 		novoAluno.setNome("Lorem Ipsum");
 		novoAluno.setDataNascimento(LocalDate.of(2000, 10, 1));
 		novoAluno.setDataIngresso(LocalDate.of(2020, 1, 1));
-		novoAluno.setEndereco(Endereco.builder().cep("65000000").build());
-		novoAluno.setCurso(curso);
-		novoAluno.setUsuario(usuario);
 		
 		mockMvc.perform(post("/aluno")
                 .contentType(MediaType.APPLICATION_JSON)

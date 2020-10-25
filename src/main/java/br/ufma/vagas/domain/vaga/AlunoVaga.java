@@ -9,11 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 import br.ufma.vagas.domain.geral.Aluno;
-import lombok.Builder;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Builder @Data
+@Getter @Setter
 public class AlunoVaga implements Serializable {
 	private static final long serialVersionUID = 635348355258598348L;
 	
@@ -27,7 +29,9 @@ public class AlunoVaga implements Serializable {
 	private AlunoVagaId id;
 
 	@Embeddable
-	@Data @Builder
+	@Getter @Setter
+	@NoArgsConstructor
+	@AllArgsConstructor
 	public static class AlunoVagaId implements Serializable {
 		private static final long serialVersionUID = 4151742404163682369L;
 		

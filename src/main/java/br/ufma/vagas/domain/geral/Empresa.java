@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.br.CNPJ;
 
 import br.ufma.vagas.domain.EntityBase;
 import lombok.Getter;
@@ -14,15 +19,29 @@ import lombok.Setter;
 public class Empresa extends EntityBase implements Serializable {
 	private static final long serialVersionUID = -2639131072190392289L;
 	
+	@NotBlank(message = "O preenchimento deste campo é obrigatório")
 	private String nome;
+	
+	@NotBlank(message = "O preenchimento deste campo é obrigatório")
+	@CNPJ(message = "Informe um CNPJ válido")
 	private String cnpj;
+	
 	private String natureza;
+	
+	@NotBlank(message = "O preenchimento deste campo é obrigatório")
 	private String representante;
+	
+	@NotBlank(message = "O preenchimento deste campo é obrigatório")
+	@Email(message = "Informe um email válido")
 	private String email;
+	
 	private String site;
+	
+	@NotBlank(message = "O preenchimento deste campo é obrigatório")
 	private String telefone;
 	
 	@Embedded
+	@Valid
 	private Endereco endereco;
 
 }

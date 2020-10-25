@@ -6,12 +6,11 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@Builder
 @Embeddable
+@Getter @Setter
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 2442805561440142624L;
 	

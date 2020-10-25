@@ -2,6 +2,8 @@ package br.ufma.vagas.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -52,20 +54,20 @@ public class EmpresaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Empresa> salvar(@RequestBody Empresa empresa) {
+	public ResponseEntity<Empresa> salvar(@RequestBody @Valid Empresa empresa) {
 		var empresaSalva = empresaService.salvar(empresa);
 		var uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(empresaSalva.getId()).toUri();
 		return ResponseEntity.created(uri).body(empresaSalva);
 	}
 	
 	@PutMapping
-	public ResponseEntity<Empresa> editar(@RequestBody Empresa empresa) {
+	public ResponseEntity<Empresa> editar(@RequestBody @Valid Empresa empresa) {
 		var empresaSalva = empresaService.editar(empresa);
 		return ResponseEntity.ok(empresaSalva);	
 	}
 	
 	@DeleteMapping
-	public ResponseEntity<?> remover(@RequestBody Empresa empresa) {
+	public ResponseEntity<?> remover(@RequestBody @Valid Empresa empresa) {
 		empresaService.remover(empresa);
 		return ResponseEntity.ok().build();
 	}

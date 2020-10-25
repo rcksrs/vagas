@@ -64,13 +64,12 @@ public class VagaService extends ServiceBase<Vaga, VagaRepository> {
 		var validarCurso = vagaSalva.getCursos().size() == 0 || vagaSalva.getCursos().stream().filter(c -> c.getId() == alunoSalvo.getCurso().getId()).count() != 0;
 		if(!validarCurso) throw new BusinessException("O aluno não possui nenhum dos cursos requisitados pela vaga");
 		
-		var alunoVaga = AlunoVaga.builder()
-				.ativo(true)
-				.criadoEm(LocalDateTime.now())
-				.selecionado(false)
-				.pontuacao(0)
-				.id(AlunoVagaId.builder().aluno(alunoSalvo).vaga(vagaSalva).build())
-				.build();
+		var alunoVaga = new AlunoVaga();
+		alunoVaga.setAtivo(true);
+		alunoVaga.setCriadoEm(LocalDateTime.now());
+		alunoVaga.setSelecionado(false);
+		alunoVaga.setPontuacao(0);
+		alunoVaga.setId(new AlunoVagaId(alunoSalvo, vagaSalva));
 		var alunoVagaSalvo = alunoVagaRepository.save(alunoVaga);
 		
 		//TODO: enviar email de confirmação ao aluno
