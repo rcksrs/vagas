@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 
@@ -43,7 +42,6 @@ public class Empresa extends EntityBase implements Serializable {
 	
 	@Embedded
 	@Valid
-	@NotNull(message = "O preenchimento deste campo é obrigatório")
 	private Endereco endereco;
 
 }

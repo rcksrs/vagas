@@ -6,10 +6,8 @@ import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +25,6 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/empresa")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
 public class EmpresaController {
 	
 	private EmpresaService empresaService;
@@ -35,12 +32,6 @@ public class EmpresaController {
 	@GetMapping
 	public ResponseEntity<Page<Empresa>> obterTodos(@PageableDefault(sort = "nome", size = 20) Pageable pageable) {
 		var empresas = empresaService.obterTodos(pageable);
-		return ResponseEntity.ok(empresas);
-	}
-	
-	@GetMapping("/listar")
-	public ResponseEntity<List<Empresa>> obterTodos() {
-		var empresas = empresaService.obterTodos(Sort.by("nome"));
 		return ResponseEntity.ok(empresas);
 	}
 	

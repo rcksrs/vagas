@@ -14,5 +14,4 @@ public class PerfilService extends ServiceBase<Perfil, PerfilRepository> {
 	public List<Perfil> obterPorResumo(String resumo) {
 		return repository.findByResumoContainingIgnoreCase(resumo);
 	}
-	
 }

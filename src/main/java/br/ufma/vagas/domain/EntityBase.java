@@ -17,8 +17,8 @@ public abstract class EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
-	protected LocalDateTime criadoEm = LocalDateTime.now();
+	protected LocalDateTime criadoEm;
 	protected LocalDateTime atualizadoEm;
-	protected Boolean ativo = true;
+	protected Boolean ativo;
 
 }
