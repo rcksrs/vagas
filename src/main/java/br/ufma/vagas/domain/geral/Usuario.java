@@ -34,7 +34,8 @@ public class Usuario extends EntityBase implements Serializable {
 	private String telefone;
 	private Boolean telefoneConfirmado;
 	
-	@JsonIgnore
+//	@JsonIgnore
+	@NotBlank(message = "O preenchimento deste campo é obrigatório")
 	private String senha;
 	
 	@OneToOne(cascade = CascadeType.ALL)

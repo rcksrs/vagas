@@ -3,6 +3,7 @@ package br.ufma.vagas.domain.geral;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -34,13 +35,14 @@ public class Aluno extends EntityBase implements Serializable {
 	
 	@Embedded
 	@Valid
+	@NotNull(message = "O preenchimento deste campo é obrigatório")
 	private Endereco endereco;
 	
 	@ManyToOne
 	@NotNull(message = "O preenchimento deste campo é obrigatório")
 	private Curso curso;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@NotNull(message = "O preenchimento deste campo é obrigatório")
 	private Usuario usuario;
 

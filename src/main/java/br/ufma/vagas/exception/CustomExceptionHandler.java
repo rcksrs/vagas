@@ -2,6 +2,7 @@ package br.ufma.vagas.exception;
 
 import java.util.ArrayList;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +46,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 		var exception = new ExceptionMessage(ex.getMessage(), HttpStatus.BAD_REQUEST, null);
         return handleExceptionInternal(ex, exception, new HttpHeaders(), exception.getStatusCode(), request);
     }
+	
+	@ExceptionHandler({ DataIntegrityViolationException.class })
+	public ResponseEntity<Object> handleDataIntegrityViolationException(Exception ex, WebRequest request) {
+		var message = "Não foi possível concluir a operação. Verifique se os dados estão duplicados ou se o ítem está em uso";
+		var exception = new ExceptionMessage(message, HttpStatus.INTERNAL_SERVER_ERROR, null);
+	    return new ResponseEntity<Object>(exception, new HttpHeaders(), exception.getStatusCode());
+	}
 	
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {

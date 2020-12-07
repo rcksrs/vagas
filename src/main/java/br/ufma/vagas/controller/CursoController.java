@@ -6,8 +6,10 @@ import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,12 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ufma.vagas.domain.geral.Curso;
+import br.ufma.vagas.domain.geral.TipoCurso;
 import br.ufma.vagas.service.geral.CursoService;
 import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/curso")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class CursoController {
 	
 	private CursoService cursoService;
@@ -33,6 +37,18 @@ public class CursoController {
 	public ResponseEntity<Page<Curso>> obterTodos(@PageableDefault(sort = "nome", size = 20) Pageable pageable) {
 		var cursos = cursoService.obterTodos(pageable);
 		return ResponseEntity.ok(cursos);
+	}
+	
+	@GetMapping("/listar")
+	public ResponseEntity<List<Curso>> obterTodos() {
+		var cursos = cursoService.obterTodos(Sort.by("nome"));
+		return ResponseEntity.ok(cursos);
+	}
+	
+	@GetMapping("/tipo")
+	public ResponseEntity<List<TipoCurso>> obterTiposCurso() {
+		var tipos = cursoService.obterTiposCurso();
+		return ResponseEntity.ok(tipos);
 	}
 	
 	@GetMapping("/{id}")
