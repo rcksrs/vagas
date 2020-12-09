@@ -10,8 +10,6 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.ufma.vagas.domain.EntityBase;
 import br.ufma.vagas.domain.perfil.Perfil;
 import lombok.Getter;
@@ -34,7 +32,8 @@ public class Usuario extends EntityBase implements Serializable {
 	private String telefone;
 	private Boolean telefoneConfirmado;
 	
-	@JsonIgnore
+	//@JsonIgnore
+	@NotBlank(message = "O preenchimento deste campo é obrigatório")
 	private String senha;
 	
 	@OneToOne(cascade = CascadeType.ALL)

@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/funcionario")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class FuncionarioController {
 	
 	private FuncionarioService funcionarioService;
@@ -30,6 +33,12 @@ public class FuncionarioController {
 	@GetMapping
 	public ResponseEntity<Page<Funcionario>> obterTodos(@PageableDefault(sort = "nome", size = 20) Pageable pageable) {
 		var funcionarios = funcionarioService.obterTodos(pageable);
+		return ResponseEntity.ok(funcionarios);
+	}
+	
+	@GetMapping("/listar")
+	public ResponseEntity<List<Funcionario>> obterTodos() {
+		var funcionarios = funcionarioService.obterTodos(Sort.by("nome"));
 		return ResponseEntity.ok(funcionarios);
 	}
 	

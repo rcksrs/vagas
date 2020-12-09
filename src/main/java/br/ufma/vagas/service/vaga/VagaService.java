@@ -9,12 +9,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.ufma.vagas.domain.perfil.TipoExperiencia;
 import br.ufma.vagas.domain.vaga.AlunoVaga;
 import br.ufma.vagas.domain.vaga.AlunoVaga.AlunoVagaId;
 import br.ufma.vagas.domain.vaga.Vaga;
 import br.ufma.vagas.exception.BusinessException;
 import br.ufma.vagas.exception.ResourceNotFoundException;
 import br.ufma.vagas.repository.geral.AlunoRepository;
+import br.ufma.vagas.repository.perfil.TipoExperienciaRepository;
 import br.ufma.vagas.repository.vaga.AlunoVagaRepository;
 import br.ufma.vagas.repository.vaga.VagaRepository;
 import br.ufma.vagas.service.ServiceBase;
@@ -27,6 +29,9 @@ public class VagaService extends ServiceBase<Vaga, VagaRepository> {
 	
 	@Autowired
 	private AlunoRepository alunoRepository;
+	
+	@Autowired
+	private TipoExperienciaRepository tipoExperienciaRepository;
 	
 	public List<Vaga> filtrarPorData(LocalDate dataInicial, LocalDate dataFinal) {
 		return repository.findByEncerramentoBetween(dataInicial, dataFinal);
@@ -52,6 +57,10 @@ public class VagaService extends ServiceBase<Vaga, VagaRepository> {
 		return alunoVagaRepository.findByIdVagaId(vagaId);
 	}
 	
+	public List<TipoExperiencia> obterTiposExepriencia() {
+		return tipoExperienciaRepository.findByAtivoTrue();
+	}
+	
 	public AlunoVaga candidatar(Long alunoId, Long vagaId) {
 		var alunoSalvo = alunoRepository.findById(alunoId).orElseThrow(() -> new ResourceNotFoundException("O aluno informado não foi encontrado na base de dados"));
 		if(!alunoSalvo.getUsuario().getEmailConfirmado()) throw new BusinessException("Confirme o email cadastrado antes de realizar a inscrição");
@@ -74,6 +83,11 @@ public class VagaService extends ServiceBase<Vaga, VagaRepository> {
 		
 		//TODO: enviar email de confirmação ao aluno
 		return alunoVagaSalvo;
+	}
+	
+	public AlunoVaga classificar(AlunoVaga alunoVaga) {
+		alunoVaga.setSelecionado(true);
+		return alunoVagaRepository.save(alunoVaga);
 	}
 	
 	@Override

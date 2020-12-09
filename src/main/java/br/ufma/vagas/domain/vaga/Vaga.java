@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import br.ufma.vagas.domain.EntityBase;
 import br.ufma.vagas.domain.geral.Curso;
@@ -22,16 +24,27 @@ import lombok.Setter;
 public class Vaga extends EntityBase implements Serializable {
 	private static final long serialVersionUID = 5275967908923321137L;
 	
+	@NotBlank(message = "O preenchimento deste campo é obrigatório")
 	private String titulo;
+
+	@NotBlank(message = "O preenchimento deste campo é obrigatório")
 	private String descricao;
+
+	@NotNull(message = "O preenchimento deste campo é obrigatório")
 	private Integer vagas;
+
+	@NotNull(message = "O preenchimento deste campo é obrigatório")
 	private LocalDate abertura;
+
+	@NotNull(message = "O preenchimento deste campo é obrigatório")
 	private LocalDate encerramento;
-	
+
 	@ManyToOne
+	@NotNull(message = "O preenchimento deste campo é obrigatório")
 	private TipoExperiencia tipo;
-	
+
 	@ManyToOne
+	@NotNull(message = "O preenchimento deste campo é obrigatório")
 	private Empresa empresa;
 	
 	@ManyToMany
